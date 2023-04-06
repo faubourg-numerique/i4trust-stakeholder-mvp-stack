@@ -1,0 +1,88 @@
+version: "3"
+services:
+    mongo-db:
+        image: "mongo:${MONGO_DB_TAG}"
+        hostname: "mongo-db"
+        environment:
+            - "MONGO_INITDB_ROOT_USERNAME=${MONGO_DB_USERNAME}"
+            - "MONGO_INITDB_ROOT_PASSWORD=${MONGO_DB_PASSWORD}"
+        restart: "always"
+        volumes:
+            - "./mongo-db:/data/db"
+
+    mysql:
+        image: "mysql:${MYSQL_TAG}"
+        hostname: "mysql"
+        environment:
+            - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+            - "MYSQL_USER=${MYSQL_USERNAME}"
+            - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+            - "MYSQL_DATABASE=keyrock"
+        restart: "always"
+        volumes:
+            - "./mysql:/var/lib/mysql"
+
+    orion-ld:
+        image: "fiware/orion-ld:${ORION_LD_TAG}"
+        hostname: "orion-ld"
+        ports:
+            - "${ORION_LD_PORT}:1026"
+        environment:
+            - "ORIONLD_MONGO_HOST=mongo-db"
+            - "ORIONLD_MONGO_USER=${MONGO_DB_USERNAME}"
+            - "ORIONLD_MONGO_PASSWORD=${MONGO_DB_PASSWORD}"
+        restart: "always"
+        depends_on:
+            - "mongo-db"
+
+    keyrock:
+        image: "fiware/idm:${KEYROCK_TAG}"
+        hostname: "keyrock"
+        ports:
+            - "${KEYROCK_PORT}:3000"
+        environment:
+            - "IDM_DB_HOST=mysql"
+            - "IDM_DB_USER=${MYSQL_USERNAME}"
+            - "IDM_DB_PASS=${MYSQL_PASSWORD}"
+            - "IDM_DB_NAME=keyrock"
+            - "IDM_DB_SEED=true"
+            - "IDM_SERVER_MAX_HEADER_SIZE=32768"
+            - "IDM_AR_URL=internal"
+            - "IDM_PR_URL=${I4TRUST_SATELLITE_URL}"
+            - "IDM_PR_TOKEN_ENDPOINT=${I4TRUST_SATELLITE_TOKEN_URL}"
+            - "IDM_PR_PARTIES_ENDPOINT=${I4TRUST_SATELLITE_PARTIES_URL}"
+            - "IDM_PR_ID=${I4TRUST_SATELLITE_ID}"
+            - "IDM_PR_CLIENT_ID=${CLIENT_ID}"
+            - "IDM_PR_CLIENT_KEY=${CLIENT_PRIVATE_KEY}"
+            - "IDM_PR_CLIENT_CRT=${CLIENT_CERTIFICATES}"
+        restart: "always"
+        volumes:
+            - "./fiware-idm/controllers/extparticipant/utils.js:/opt/fiware-idm/controllers/extparticipant/utils.js"
+        depends_on:
+            - "mysql"
+
+    kong:
+        image: "quay.io/fiware/kong:${KONG_TAG}"
+        hostname: "kong"
+        ports:
+            - "${KONG_PORT}:8080"
+        environment:
+            KONG_DATABASE: "off"
+            KONG_PROXY_LISTEN: "0.0.0.0:8080"
+            KONG_ADMIN_LISTEN: "0.0.0.0:8000"
+            KONG_ADMIN_ACCESS_LOG: "/dev/stdout"
+            KONG_ADMIN_ERROR_LOG: "/dev/stderr"
+            KONG_PROXY_ACCESS_LOG: "/dev/stdout"
+            KONG_PROXY_ERROR_LOG: "/dev/stderr"
+            KONG_ADMIN_GUI_ACCESS_LOG: "/dev/stdout"
+            KONG_ADMIN_GUI_ERROR_LOG: "/dev/stderr"
+            KONG_PORTAL_API_ACCESS_LOG: "/dev/stdout"
+            KONG_PORTAL_API_ERROR_LOG: "/dev/stderr"
+            KONG_DECLARATIVE_CONFIG: "/opt/kong/kong.yaml"
+            KONG_NGINX_WORKER_PROCESSES: "2"
+            KONG_NGINX_PROXY_LARGE_CLIENT_HEADER_BUFFERS: "16 128k"
+            KONG_NGINX_PROXY_HTTP2_MAX_FIELD_SIZE: "32k"
+            KONG_NGINX_PROXY_HTTP2_MAX_HEADER_SIZE: "32k"
+        restart: "always"
+        volumes:
+            - "./kong-config/kong.yaml:/opt/kong/kong.yaml"
