@@ -41,7 +41,7 @@ The "i4Trust stakeholder MVP stack" will allow you to rapidly deploy and configu
 
 ### Configuration
 
-> The following commands work with Debian with root accessible via sudo.  
+> The following commands works for Debian with root accessible via sudo.  
 > They may differ with other operating systems.
 
 Clone the repository
