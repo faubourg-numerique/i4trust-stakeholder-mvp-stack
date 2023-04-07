@@ -21,7 +21,7 @@ services:
               - "authorization"
               - "Authorization"
           ar:
-            identifier: "EU.EORI.00000000"
+            identifier: "EU.EORI.NL123456789"
             host: "http://keyrock:3000"
             token_endpoint: "http://keyrock:3000/oauth2/token"
             delegation_endpoint: "http://keyrock:3000/ar/delegation"
@@ -31,7 +31,7 @@ services:
             token_endpoint: "https://mw.i4trustsat.ishareworks.nl/connect/token"
             trusted_list_endpoint: "https://mw.i4trustsat.ishareworks.nl/trusted_list"
           jws:
-            identifier: "EU.EORI.00000000"
+            identifier: "EU.EORI.NL123456789"
             private_key: |
               -----BEGIN PRIVATE KEY-----
               -----END PRIVATE KEY-----

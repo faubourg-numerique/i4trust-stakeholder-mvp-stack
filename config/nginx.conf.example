@@ -1,0 +1,43 @@
+events {
+}
+
+http {
+    server {
+        server_name keyrock.example.com;
+
+        listen 443 ssl;
+
+        ssl_certificate /etc/letsencrypt/live/keyrock.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/keyrock.example.com/privkey.pem;
+
+        location / {
+            proxy_pass http://keyrock:3000;
+        }
+    }
+
+    server {
+        server_name kong.example.com;
+
+        listen 443 ssl;
+
+        ssl_certificate /etc/letsencrypt/live/kong.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/kong.example.com/privkey.pem;
+
+        location / {
+            proxy_pass http://kong:8080;
+        }
+    }
+
+    server {
+        server_name wilma.example.com;
+
+        listen 443 ssl;
+
+        ssl_certificate /etc/letsencrypt/live/wilma.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/wilma.example.com/privkey.pem;
+
+        location / {
+            proxy_pass http://wilma:8090;
+        }
+    }
+}

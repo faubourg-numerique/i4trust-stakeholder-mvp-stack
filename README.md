@@ -31,11 +31,12 @@ The "i4Trust stakeholder MVP stack" will allow you to rapidly deploy and configu
 
 ### Prerequisites
 
+* [Git](https://git-scm.com/)
 * [Docker](https://docs.docker.com/engine/install/)
 * [Docker Compose](https://docs.docker.com/compose/install/)
-* [Git](https://git-scm.com/)
+* [Certbot](https://certbot.eff.org/)
 
-### Installation
+### Configuration
 
 Clone the repository
 
@@ -49,18 +50,20 @@ Access the cloned repository
 cd i4trust-stakeholder-mvp-stack
 ```
 
-### Configuration
-
-Create the environment file
+Create and edit the configuration files
 
 ```
 cp ./.env.example ./.env
+cp ./config/kong.yaml.example ./config/kong.yaml
+cp ./config/nginx.conf.example ./config/nginx.conf
 ```
 
-Create the kong config file
+Generate the HTTPS certificates
 
 ```
-cp ./kong-config/kong.yaml.example ./kong-config/kong.yaml
+sudo certbot certonly --standalone -d keyrock.example.com
+sudo certbot certonly --standalone -d kong.example.com
+sudo certbot certonly --standalone -d wilma.example.com
 ```
 
 ## Usage
@@ -68,11 +71,11 @@ cp ./kong-config/kong.yaml.example ./kong-config/kong.yaml
 Start the services
 
 ```
-docker compose up -d
+sudo docker compose up -d
 ```
 
 Stop the services
 
 ```
-docker compose down
+sudo docker compose down
 ```

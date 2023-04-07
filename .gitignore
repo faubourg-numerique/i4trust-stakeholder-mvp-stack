@@ -1,2 +1,3 @@
 /.env
-/kong-config/kong.yaml
+/config/kong.yaml
+/config/nginx.conf
