@@ -1,3 +1,4 @@
 /.env
 /config/kong.yaml
 /config/nginx.conf
+node_modules/

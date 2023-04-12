@@ -38,6 +38,7 @@ The "i4Trust stakeholder MVP stack" will allow you to rapidly deploy and configu
 * [Docker](https://docs.docker.com/engine/install/)
 * [Docker Compose](https://docs.docker.com/compose/install/)
 * [Certbot](https://certbot.eff.org/)
+* [Node.js](https://nodejs.org/en) >= 18 (with npm)
 
 ### Configuration
 
@@ -56,7 +57,7 @@ Access the cloned repository
 cd i4trust-stakeholder-mvp-stack
 ```
 
-Create and edit the configuration files
+Create the configuration files
 
 ```
 cp ./.env.example ./.env
@@ -64,12 +65,51 @@ cp ./config/kong.yaml.example ./config/kong.yaml
 cp ./config/nginx.conf.example ./config/nginx.conf
 ```
 
+Edit the configuration files with correct values
+
+> It is not recommended to use different tags, the deployment could no longer work correctly.
+
 Generate the HTTPS certificates
 
 ```
 sudo certbot certonly --standalone -d keyrock.example.com
 sudo certbot certonly --standalone -d kong.example.com
 sudo certbot certonly --standalone -d wilma.example.com
+```
+
+> Please note that generated certificates have an expiration date. Make sure Certbot has scheduled tasks to renew them automatically.
+
+#### Wilma configuration
+
+> To simplify deployment, an automated Keyrock configuration script for Wilma is provided. This will create through the Keyrock API the application, pep proxy, permissions and role automatically. It must be executed only once. It is also quite possible not to use this script and to do the configuration manually.
+
+Start the services
+
+```
+sudo docker compose up -d
+```
+
+Wait a few minutes for the service to be fully started.
+
+Install the script
+
+```
+npm install --prefix ./keyrock-wilma-config-script/
+```
+
+Run the script
+
+```
+node ./keyrock-wilma-config-script/index.js
+```
+
+Update the environment file with the values provided by the script
+
+Restart the services
+
+```
+sudo docker compose down
+sudo docker compose up -d
 ```
 
 ## Usage
