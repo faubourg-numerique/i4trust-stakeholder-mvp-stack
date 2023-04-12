@@ -54,6 +54,8 @@ services:
             - "IDM_PR_CLIENT_KEY=${CLIENT_PRIVATE_KEY}"
         restart: "always"
         volumes:
+            # The following volume fixes a Keyrock bug with the EU.EORI.NLi4TRUSTSAT satellite
+            # https://spaces.fundingbox.com/spaces/i4trust-i4trust-helpdesk/64074eec3890916e220b2ce3
             - "./fiware-idm/controllers/extparticipant/utils.js:/opt/fiware-idm/controllers/extparticipant/utils.js"
         depends_on:
             - "mysql"
