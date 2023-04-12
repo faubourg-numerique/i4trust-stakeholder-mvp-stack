@@ -75,6 +75,7 @@ Generate the HTTPS certificates
 sudo certbot certonly --standalone -d keyrock.example.com
 sudo certbot certonly --standalone -d kong.example.com
 sudo certbot certonly --standalone -d wilma.example.com
+sudo certbot certonly --standalone -d activation-service.example.com
 ```
 
 > Please note that generated certificates have an expiration date. Make sure Certbot has scheduled tasks to renew them automatically.

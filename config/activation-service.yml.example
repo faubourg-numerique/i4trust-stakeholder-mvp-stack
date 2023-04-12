@@ -1,0 +1,25 @@
+client:
+  id: "EU.EORI.NL123456789"
+  crt: |
+    -----BEGIN CERTIFICATE-----
+    -----END CERTIFICATE-----
+    -----BEGIN CERTIFICATE-----
+    -----END CERTIFICATE-----
+    -----BEGIN CERTIFICATE-----
+    -----END CERTIFICATE-----
+  key: |
+    -----BEGIN PRIVATE KEY-----
+    -----END PRIVATE KEY-----
+
+express:
+  port: 7000
+
+db:
+  source: ":memory:"
+
+ar:
+  id: "EU.EORI.NL123456789"
+  token: "http://keyrock:3000/oauth2/token"
+  policy: "http://keyrock:3000/ar/policy"
+  delegation: "http://keyrock:3000/ar/delegation"
+  rejectUnauthorized: false

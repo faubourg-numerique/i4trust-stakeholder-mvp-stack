@@ -1,4 +1,5 @@
 /.env
 /config/kong.yaml
 /config/nginx.conf
+/config/activation-service.yml
 node_modules/

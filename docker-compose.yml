@@ -104,6 +104,14 @@ services:
         depends_on:
             - "keyrock"
 
+    activation-service:
+        image: "i4trust/activation-service:${ACTIVATION_SERVICE_TAG}"
+        hostname: "activation-service"
+        ports:
+            - "${ACTIVATION_SERVICE_PORT}:7000"
+        volumes:
+            - "./config/activation-service.yml:/home/aservice/config/as.yml"
+
     nginx:
         image: "nginx:${NGINX_TAG}"
         hostname: "nginx"
