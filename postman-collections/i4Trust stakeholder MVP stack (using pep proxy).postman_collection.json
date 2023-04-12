@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "dc52df8f-27ff-4551-b73c-bb9e4b9afb42",
+		"name": "i4Trust stakeholder MVP stack (using pep proxy)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create an entity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"urn:ngsi-ld:Test:test1\",\r\n    \"type\": \"Test\",\r\n    \"name\": {\r\n        \"type\": \"Property\",\r\n        \"value\": \"Hello world!\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{context_broker_pep_proxy_url}}/ngsi-ld/v1/entities",
+					"host": [
+						"{{context_broker_pep_proxy_url}}"
+					],
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve an entity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{context_broker_pep_proxy_url}}/ngsi-ld/v1/entities/urn:ngsi-ld:Test:test1",
+					"host": [
+						"{{context_broker_pep_proxy_url}}"
+					],
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						"urn:ngsi-ld:Test:test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an entity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": {\r\n        \"type\": \"Property\",\r\n        \"value\": \"¡Hola, mundo!\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{context_broker_pep_proxy_url}}/ngsi-ld/v1/entities/urn:ngsi-ld:Test:test1/attrs",
+					"host": [
+						"{{context_broker_pep_proxy_url}}"
+					],
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						"urn:ngsi-ld:Test:test1",
+						"attrs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an entity",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{context_broker_pep_proxy_url}}/ngsi-ld/v1/entities/urn:ngsi-ld:Test:test1",
+					"host": [
+						"{{context_broker_pep_proxy_url}}"
+					],
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						"urn:ngsi-ld:Test:test1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "clientSecret",
+				"value": "{{keyrock_context_broker_app_oauth2_client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{keyrock_context_broker_app_oauth2_client_id}}",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{keyrock_oauth2_token_url}}",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "Context broker access token",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{keyrock_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{keyrock_username}}",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "password_credentials",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "keyrock_oauth2_token_url",
+			"value": "https://keyrock.example.com/oauth2/token",
+			"type": "default"
+		},
+		{
+			"key": "keyrock_context_broker_app_oauth2_client_id",
+			"value": "00000000-0000-0000-0000-000000000000",
+			"type": "default"
+		},
+		{
+			"key": "keyrock_context_broker_app_oauth2_client_secret",
+			"value": "00000000-0000-0000-0000-000000000000",
+			"type": "default"
+		},
+		{
+			"key": "keyrock_username",
+			"value": "admin@test.com",
+			"type": "default"
+		},
+		{
+			"key": "keyrock_password",
+			"value": "1234",
+			"type": "default"
+		},
+		{
+			"key": "context_broker_pep_proxy_url",
+			"value": "https://wilma.example.com",
+			"type": "default"
+		}
+	]
+}
