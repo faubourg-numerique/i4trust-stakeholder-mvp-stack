@@ -63,6 +63,7 @@ Create the configuration files
 cp ./.env.example ./.env
 cp ./config/kong.yaml.example ./config/kong.yaml
 cp ./config/nginx.conf.example ./config/nginx.conf
+cp ./config/activation-service.yml.example ./config/activation-service.yml
 ```
 
 Edit the configuration files with correct values
