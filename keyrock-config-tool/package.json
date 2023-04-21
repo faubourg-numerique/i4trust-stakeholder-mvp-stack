@@ -1,5 +1,5 @@
 {
-  "name": "keyrock-wilma-config-script",
+  "name": "keyrock-config-tool",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

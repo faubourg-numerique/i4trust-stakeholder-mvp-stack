@@ -83,7 +83,7 @@ sudo certbot certonly --standalone -d activation-service.example.com
 
 #### Wilma configuration
 
-> To simplify deployment, an automated Keyrock configuration script for Wilma is provided. This will create through the Keyrock API the application, pep proxy, permissions and role automatically. It must be executed only once. It is also quite possible not to use this script and to do the configuration manually.
+> To simplify deployment, a configuration tool for Keyrock is provided. This will create through the Keyrock API the application, pep proxy, permissions and role automatically. It must be executed only once. It is also quite possible not to use this script and to do the configuration manually.
 
 Start the services
 
@@ -96,13 +96,13 @@ Wait a few minutes for the service to be fully started.
 Install the script
 
 ```
-npm install --prefix ./keyrock-wilma-config-script/
+npm install --prefix ./keyrock-config-tool/
 ```
 
 Run the script
 
 ```
-node ./keyrock-wilma-config-script/index.js
+node ./keyrock-config-tool/index.js
 ```
 
 Update the environment file with the values provided by the script
