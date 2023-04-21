@@ -40,7 +40,7 @@ The "i4Trust stakeholder MVP stack" will allow you to rapidly deploy and configu
 * [Certbot](https://certbot.eff.org/)
 * [Node.js](https://nodejs.org/en) >= 18 (with npm)
 
-### Configuration
+### Installation
 
 > The following commands works for Debian with root accessible via sudo.  
 > They may differ with other operating systems.
@@ -70,6 +70,8 @@ Edit the configuration files with correct values
 
 > It is not recommended to use different tags, the deployment could no longer work correctly.
 
+#### HTTPS certificates
+
 Generate the HTTPS certificates
 
 ```
@@ -91,12 +93,12 @@ Start the services
 sudo docker compose up -d
 ```
 
-Wait a few minutes for the service to be fully started.
+Wait a few minutes for the services to be fully started.
 
 Install the script
 
 ```
-npm install --prefix ./keyrock-config-tool/
+npm install --prefix ./keyrock-config-tool
 ```
 
 Run the script
