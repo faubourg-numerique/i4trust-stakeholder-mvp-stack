@@ -81,7 +81,7 @@ sudo certbot certonly --standalone -d activation-service.example.com
 
 > Please note that generated certificates have an expiration date. Make sure Certbot has scheduled tasks to renew them automatically.
 
-#### Wilma configuration
+#### Keyrock configuration
 
 > To simplify deployment, a configuration tool for Keyrock is provided. This will create through the Keyrock API the application, pep proxy, permissions and role automatically. It must be executed only once. It is also quite possible not to use this script and to do the configuration manually.
 
