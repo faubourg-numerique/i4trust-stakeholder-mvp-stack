@@ -53,4 +53,17 @@ http {
             proxy_pass http://activation-service:7000;
         }
     }
+
+    server {
+        server_name mintaka.example.com;
+
+        listen 443 ssl;
+
+        ssl_certificate /etc/letsencrypt/live/mintaka.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/mintaka.example.com/privkey.pem;
+
+        location / {
+            proxy_pass http://mintaka:8080;
+        }
+    }
 }
