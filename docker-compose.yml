@@ -19,6 +19,17 @@ services:
         volumes:
             - "./mysql:/var/lib/mysql"
 
+    timescale:
+        image: "timescale/timescaledb-postgis:${TIMESCALE_TAG}"
+        hostname: "timescale"
+        environment:
+            - "POSTGRES_HOST_AUTH_METHOD=trust"
+            - "POSTGRES_USER=orion-ld"
+            - "POSTGRES_PASSWORD=${TIMESCALE_POSTGRE_SQL_PASSWORD}"
+        restart: "always"
+        volumes:
+            - "./timescale:/var/lib/postgresql/data"
+
     orion-ld:
         image: "fiware/orion-ld:${ORION_LD_TAG}"
         hostname: "orion-ld"
@@ -28,9 +39,26 @@ services:
             - "ORIONLD_MONGO_HOST=mongo-db"
             - "ORIONLD_MONGO_USER=root"
             - "ORIONLD_MONGO_PASSWORD=${MONGO_DB_ROOT_PASSWORD}"
+            - "ORIONLD_TROE=TRUE"
+            - "ORIONLD_TROE_HOST=timescale"
+            - "ORIONLD_TROE_USER=orion-ld"
+            - "ORIONLD_TROE_PWD=${TIMESCALE_POSTGRE_SQL_PASSWORD}"
         restart: "always"
         depends_on:
             - "mongo-db"
+            - "timescale"
+
+    mintaka:
+        image: "fiware/mintaka:${MINTAKA_TAG}"
+        hostname: "mintaka"
+        ports:
+            - "${MINTAKA_PORT}:8080"
+        environment:
+            - "DATASOURCES_DEFAULT_HOST=timescale"
+            - "DATASOURCES_DEFAULT_USERNAME=orion-ld"
+            - "DATASOURCES_DEFAULT_PASSWORD=${TIMESCALE_POSTGRE_SQL_PASSWORD}"
+            - "DATASOURCES_DEFAULT_DATABSE=orion-ld"
+        restart: "always"
 
     keyrock:
         image: "fiware/idm:${KEYROCK_TAG}"
