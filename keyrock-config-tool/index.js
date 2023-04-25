@@ -112,9 +112,9 @@ async function main() {
     process.stdout.write(" OK\n\n");
 
     process.stdout.write("Update the .env file with the following values:\n\n");
-    process.stdout.write(`WILMA_APP_ID=${application.id}\n`);
-    process.stdout.write(`WILMA_APP_USERNAME=${pepProxy.id}\n`);
-    process.stdout.write(`WILMA_APP_PASSWORD=${pepProxy.password}\n\n`);
+    process.stdout.write(`WILMA_APP_ID="${application.id}"\n`);
+    process.stdout.write(`WILMA_APP_USERNAME="${pepProxy.id}"\n`);
+    process.stdout.write(`WILMA_APP_PASSWORD="${pepProxy.password}"\n\n`);
     process.stdout.write("Then restart the docker compose script:\n\n");
     process.stdout.write("sudo docker compose down\n");
     process.stdout.write("sudo docker compose up -d\n");
