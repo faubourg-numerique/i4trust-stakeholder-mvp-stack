@@ -116,6 +116,22 @@ sudo docker compose down
 sudo docker compose up -d
 ```
 
+### Upgrade
+
+Stop the services
+
+```
+sudo docker compose down
+```
+
+Pull the latest changes
+
+```
+git pull
+```
+
+Check example configuration files for changes that may need to be made
+
 ## Usage
 
 Start the services
