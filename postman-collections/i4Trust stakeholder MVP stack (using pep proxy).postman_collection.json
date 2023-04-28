@@ -202,7 +202,7 @@
 		},
 		{
 			"key": "context_broker_pep_proxy_url",
-			"value": "https://context-broker-proxy.example.com",
+			"value": "https://context-broker.example.com",
 			"type": "default"
 		}
 	]

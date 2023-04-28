@@ -18,12 +18,12 @@ http {
     }
 
     server {
-        server_name ${CONTEXT_BROKER_PROXY_HOSTNAME};
+        server_name ${CONTEXT_BROKER_HOSTNAME};
 
         listen 443 ssl;
 
-        ssl_certificate /etc/letsencrypt/live/${CONTEXT_BROKER_PROXY_HOSTNAME}/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/${CONTEXT_BROKER_PROXY_HOSTNAME}/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/${CONTEXT_BROKER_HOSTNAME}/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/${CONTEXT_BROKER_HOSTNAME}/privkey.pem;
 
         location / {
             proxy_pass http://wilma-context-broker;
@@ -31,12 +31,12 @@ http {
     }
 
     server {
-        server_name ${TEMPORAL_API_PROXY_HOSTNAME};
+        server_name ${TEMPORAL_API_HOSTNAME};
 
         listen 443 ssl;
 
-        ssl_certificate /etc/letsencrypt/live/${TEMPORAL_API_PROXY_HOSTNAME}/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/${TEMPORAL_API_PROXY_HOSTNAME}/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/${TEMPORAL_API_HOSTNAME}/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/${TEMPORAL_API_HOSTNAME}/privkey.pem;
 
         location / {
             proxy_pass http://wilma-temporal-api;
@@ -44,12 +44,12 @@ http {
     }
 
     server {
-        server_name ${CONTEXT_BROKER_ISHARE_PROXY_HOSTNAME};
+        server_name ${KONG_HOSTNAME};
 
         listen 443 ssl;
 
-        ssl_certificate /etc/letsencrypt/live/${CONTEXT_BROKER_ISHARE_PROXY_HOSTNAME}/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/${CONTEXT_BROKER_ISHARE_PROXY_HOSTNAME}/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/${KONG_HOSTNAME}/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/${KONG_HOSTNAME}/privkey.pem;
 
         location / {
             proxy_pass http://kong:8080;
