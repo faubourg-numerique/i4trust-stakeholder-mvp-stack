@@ -5,12 +5,12 @@ http {
     server_names_hash_bucket_size 128;
 
     server {
-        server_name keyrock.example.com;
+        server_name identity-manager.example.com;
 
         listen 443 ssl;
 
-        ssl_certificate /etc/letsencrypt/live/keyrock.example.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/keyrock.example.com/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/identity-manager.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/identity-manager.example.com/privkey.pem;
 
         location / {
             proxy_pass http://keyrock:3000;
@@ -18,12 +18,12 @@ http {
     }
 
     server {
-        server_name kong.example.com;
+        server_name context-broker-ishare-proxy.example.com;
 
         listen 443 ssl;
 
-        ssl_certificate /etc/letsencrypt/live/kong.example.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/kong.example.com/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/context-broker-ishare-proxy.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/context-broker-ishare-proxy.example.com/privkey.pem;
 
         location / {
             proxy_pass http://kong:8080;
@@ -31,12 +31,12 @@ http {
     }
 
     server {
-        server_name wilma.example.com;
+        server_name context-broker-proxy.example.com;
 
         listen 443 ssl;
 
-        ssl_certificate /etc/letsencrypt/live/wilma.example.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/wilma.example.com/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/context-broker-proxy.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/context-broker-proxy.example.com/privkey.pem;
 
         location / {
             proxy_pass http://wilma:8090;
@@ -57,12 +57,12 @@ http {
     }
 
     server {
-        server_name mintaka.example.com;
+        server_name temporal-api.example.com;
 
         listen 443 ssl;
 
-        ssl_certificate /etc/letsencrypt/live/mintaka.example.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/mintaka.example.com/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/temporal-api.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/temporal-api.example.com/privkey.pem;
 
         location / {
             proxy_pass http://mintaka:8080;

@@ -177,7 +177,7 @@
 	"variable": [
 		{
 			"key": "keyrock_oauth2_token_url",
-			"value": "https://keyrock.example.com/oauth2/token",
+			"value": "https://identity-manager.example.com/oauth2/token",
 			"type": "default"
 		},
 		{
@@ -202,7 +202,7 @@
 		},
 		{
 			"key": "context_broker_pep_proxy_url",
-			"value": "https://wilma.example.com",
+			"value": "https://context-broker-proxy.example.com",
 			"type": "default"
 		}
 	]
