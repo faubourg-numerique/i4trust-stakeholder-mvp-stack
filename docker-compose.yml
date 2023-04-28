@@ -90,39 +90,39 @@ services:
         depends_on:
             - "mysql"
 
-    wilma-context-broker:
-        image: "fiware/pep-proxy:${WILMA_CONTEXT_BROKER_TAG}"
-        hostname: "wilma-context-broker"
+    wilma-orion-ld:
+        image: "fiware/pep-proxy:${WILMA_ORION_LD_TAG}"
+        hostname: "wilma-orion-ld"
         ports:
-            - "${WILMA_CONTEXT_BROKER_PORT}:80"
+            - "${WILMA_ORION_LD_PORT}:80"
         environment:
             - "PEP_PROXY_PORT=80"
             - "PEP_PROXY_IDM_HOST=keyrock"
             - "PEP_PROXY_IDM_PORT=3000"
             - "PEP_PROXY_APP_HOST=orion-ld"
             - "PEP_PROXY_APP_PORT=1026"
-            - "PEP_PROXY_APP_ID=${WILMA_CONTEXT_BROKER_APP_ID}"
-            - "PEP_PROXY_USERNAME=${WILMA_CONTEXT_BROKER_APP_USERNAME}"
-            - "PEP_PASSWORD=${WILMA_CONTEXT_BROKER_APP_PASSWORD}"
+            - "PEP_PROXY_APP_ID=${WILMA_ORION_LD_APP_ID}"
+            - "PEP_PROXY_USERNAME=${WILMA_ORION_LD_APP_USERNAME}"
+            - "PEP_PASSWORD=${WILMA_ORION_LD_APP_PASSWORD}"
         restart: "always"
         depends_on:
             - "keyrock"
             - "orion-ld"
 
-    wilma-temporal-api:
-        image: "fiware/pep-proxy:${WILMA_TEMPORAL_API_TAG}"
-        hostname: "wilma-temporal-api"
+    wilma-mintaka:
+        image: "fiware/pep-proxy:${WILMA_MINTAKA_TAG}"
+        hostname: "wilma-mintaka"
         ports:
-            - "${WILMA_TEMPORAL_API_PORT}:80"
+            - "${WILMA_MINTAKA_PORT}:80"
         environment:
             - "PEP_PROXY_PORT=80"
             - "PEP_PROXY_IDM_HOST=keyrock"
             - "PEP_PROXY_IDM_PORT=3000"
             - "PEP_PROXY_APP_HOST=mintaka"
             - "PEP_PROXY_APP_PORT=8080"
-            - "PEP_PROXY_APP_ID=${WILMA_TEMPORAL_API_APP_ID}"
-            - "PEP_PROXY_USERNAME=${WILMA_TEMPORAL_API_APP_USERNAME}"
-            - "PEP_PASSWORD=${WILMA_TEMPORAL_API_APP_PASSWORD}"
+            - "PEP_PROXY_APP_ID=${WILMA_MINTAKA_APP_ID}"
+            - "PEP_PROXY_USERNAME=${WILMA_MINTAKA_APP_USERNAME}"
+            - "PEP_PASSWORD=${WILMA_MINTAKA_APP_PASSWORD}"
         restart: "always"
         depends_on:
             - "keyrock"
@@ -177,7 +177,7 @@ services:
             - "/etc/letsencrypt:/etc/letsencrypt"
         depends_on:
             - "keyrock"
-            - "wilma-context-broker"
-            - "wilma-temporal-api"
+            - "wilma-orion-ld"
+            - "wilma-mintaka"
             - "kong"
             - "activation-service"

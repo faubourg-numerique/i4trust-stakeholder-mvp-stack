@@ -128,13 +128,13 @@ async function main() {
         process.stdout.write("Writing variables to env file...");
 
         if (index === 0) {
-            data = `\nWILMA_CONTEXT_BROKER_APP_ID="${application.id}"\n`;
-            data += `WILMA_CONTEXT_BROKER_APP_USERNAME="${pepProxy.id}"\n`;
-            data += `WILMA_CONTEXT_BROKER_APP_PASSWORD="${pepProxy.password}"\n`;
+            data = `\nWILMA_ORION_LD_APP_ID="${application.id}"\n`;
+            data += `WILMA_ORION_LD_APP_USERNAME="${pepProxy.id}"\n`;
+            data += `WILMA_ORION_LD_APP_PASSWORD="${pepProxy.password}"\n`;
         } else {
-            data = `\nWILMA_TEMPORAL_API_APP_ID="${application.id}"\n`;
-            data += `WILMA_TEMPORAL_API_APP_USERNAME="${pepProxy.id}"\n`;
-            data += `WILMA_TEMPORAL_API_APP_PASSWORD="${pepProxy.password}"\n`;
+            data = `\nWILMA_MINTAKA_APP_ID="${application.id}"\n`;
+            data += `WILMA_MINTAKA_APP_USERNAME="${pepProxy.id}"\n`;
+            data += `WILMA_MINTAKA_APP_PASSWORD="${pepProxy.password}"\n`;
         }
 
         await fs.appendFile([rootDirectoryPath, ".env"].join(path.sep), data, { encoding: "utf-8" })

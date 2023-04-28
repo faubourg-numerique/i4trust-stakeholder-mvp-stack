@@ -26,7 +26,7 @@ http {
         ssl_certificate_key /etc/letsencrypt/live/${CONTEXT_BROKER_HOSTNAME}/privkey.pem;
 
         location / {
-            proxy_pass http://wilma-context-broker;
+            proxy_pass http://wilma-orion-ld;
         }
     }
 
@@ -39,7 +39,7 @@ http {
         ssl_certificate_key /etc/letsencrypt/live/${TEMPORAL_API_HOSTNAME}/privkey.pem;
 
         location / {
-            proxy_pass http://wilma-temporal-api;
+            proxy_pass http://wilma-mintaka;
         }
     }
 
