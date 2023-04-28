@@ -107,7 +107,7 @@ Start the services
 sudo docker compose up -d
 ```
 
-Wait a few minutes for the services to be fully started.
+Wait a few minutes for the services to be fully started (Keyrock must be accessible).
 
 Install the script
 
