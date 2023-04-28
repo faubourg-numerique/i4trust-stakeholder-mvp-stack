@@ -84,10 +84,10 @@ async function main() {
         for (const action of actions) {
             data = {
                 permission: {
-                    name: `Perform any NGSI-LD ${action} request`,
-                    description: `Perform any NGSI-LD ${action} request`,
+                    name: `Perform any ${action} request`,
+                    description: `Perform any ${action} request`,
                     action,
-                    resource: "/ngsi-ld/v1/*",
+                    resource: "*",
                     is_regex: true
                 }
             }
