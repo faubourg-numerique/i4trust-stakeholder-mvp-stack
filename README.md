@@ -87,6 +87,8 @@ node ./tools/config-file-builder-tool/index.js
 
 Generate the HTTPS certificates
 
+> You must first have created DNS A records as well as having opened ports 80 and 443 of the machine.
+
 ```
 sudo certbot certonly --standalone -d identity-manager.example.com ; \
 sudo certbot certonly --standalone -d context-broker.example.com ; \
