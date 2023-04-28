@@ -3,3 +3,6 @@
 /config/nginx.conf
 /config/activation-service.yml
 node_modules/
+/mongo-db/
+/mysql/
+/timescale/
