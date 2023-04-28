@@ -87,7 +87,7 @@ async function main() {
                     name: `Perform any ${action} request`,
                     description: `Perform any ${action} request`,
                     action,
-                    resource: "*",
+                    resource: "/*",
                     is_regex: true
                 }
             }
@@ -102,7 +102,7 @@ async function main() {
 
         data = {
             role: {
-                name: "NGSI-LD admin"
+                name: "API admin"
             }
         };
 
