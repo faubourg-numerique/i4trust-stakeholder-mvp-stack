@@ -57,7 +57,7 @@ async function main() {
         }
     ];
 
-    for (let [index, application] of applications) {
+    for (let [index, application] of applications.entries()) {
         process.stdout.write(`Creating "${application.name}" application...`);
 
         data = {
