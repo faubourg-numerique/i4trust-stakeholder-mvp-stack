@@ -67,7 +67,7 @@ Edit the env file with correct values
 
 > It is not recommended to use different tags, the deployment could no longer work correctly.
 
-#### Configuration file builder tool
+#### Configuration files
 
 > To simplify deployment, a tool to automatically create configuration files is provided. It will use environment variables to create activation-service.yml, kong.yaml and nginx.conf configuration files. You can also manually create files.
 
@@ -121,8 +121,6 @@ Run the script
 node ./tools/keyrock-config-tool/index.js
 ```
 
-Update the environment file with the values provided by the script
-
 Restart the services
 
 ```
@@ -144,7 +142,7 @@ Pull the latest changes
 git pull
 ```
 
-Check example configuration files for changes that may need to be made
+Check env example file for changes that may need to be made then run again the config file builder tool
 
 ## Usage
 
