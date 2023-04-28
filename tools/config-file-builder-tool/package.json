@@ -1,0 +1,22 @@
+{
+  "name": "config-file-builder-tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faubourg-numerique/i4trust-stakeholder-mvp-stack.git"
+  },
+  "author": "Pierre Josselin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/faubourg-numerique/i4trust-stakeholder-mvp-stack/issues"
+  },
+  "homepage": "https://github.com/faubourg-numerique/i4trust-stakeholder-mvp-stack#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}

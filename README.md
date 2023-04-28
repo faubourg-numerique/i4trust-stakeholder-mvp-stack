@@ -57,18 +57,31 @@ Access the cloned repository
 cd i4trust-stakeholder-mvp-stack
 ```
 
-Create the configuration files
+Create the env file
 
 ```
 cp ./.env.example ./.env
-cp ./config/kong.yaml.example ./config/kong.yaml
-cp ./config/nginx.conf.example ./config/nginx.conf
-cp ./config/activation-service.yml.example ./config/activation-service.yml
 ```
 
-Edit the configuration files with correct values
+Edit the env file with correct values
 
 > It is not recommended to use different tags, the deployment could no longer work correctly.
+
+#### Configuration file builder tool
+
+> To simplify deployment, a tool to automatically create configuration files is provided. It will use environment variables to create activation-service.yml, kong.yaml and nginx.conf configuration files. You can also manually create files.
+
+Install the script
+
+```
+npm install --prefix ./tools/config-file-builder-tool
+```
+
+Run the script
+
+```
+node ./tools/config-file-builder-tool/index.js
+```
 
 #### HTTPS certificates
 
@@ -99,13 +112,13 @@ Wait a few minutes for the services to be fully started.
 Install the script
 
 ```
-npm install --prefix ./keyrock-config-tool
+npm install --prefix ./tools/keyrock-config-tool
 ```
 
 Run the script
 
 ```
-node ./keyrock-config-tool/index.js
+node ./tools/keyrock-config-tool/index.js
 ```
 
 Update the environment file with the values provided by the script

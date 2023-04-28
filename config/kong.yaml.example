@@ -21,27 +21,19 @@ services:
               - "authorization"
               - "Authorization"
           ar:
-            identifier: "EU.EORI.NL123456789"
+            identifier: "${CLIENT_ID}"
             host: "http://keyrock:3000"
             token_endpoint: "http://keyrock:3000/oauth2/token"
             delegation_endpoint: "http://keyrock:3000/ar/delegation"
           satellite:
-            identifier: "EU.EORI.NLi4TRUSTSAT"
-            host: "https://mw.i4trustsat.ishareworks.nl"
-            token_endpoint: "https://mw.i4trustsat.ishareworks.nl/connect/token"
-            trusted_list_endpoint: "https://mw.i4trustsat.ishareworks.nl/trusted_list"
+            identifier: "${I4TRUST_SATELLITE_ID}"
+            host: "${I4TRUST_SATELLITE_URL}"
+            token_endpoint: "${I4TRUST_SATELLITE_TOKEN_URL}"
+            trusted_list_endpoint: "${I4TRUST_SATELLITE_TRUSTED_LIST_URL}"
           jws:
-            identifier: "EU.EORI.NL123456789"
-            private_key: |
-              -----BEGIN PRIVATE KEY-----
-              -----END PRIVATE KEY-----
-            x5c: |
-              -----BEGIN CERTIFICATE-----
-              -----END CERTIFICATE-----
-              -----BEGIN CERTIFICATE-----
-              -----END CERTIFICATE-----
-              -----BEGIN CERTIFICATE-----
-              -----END CERTIFICATE-----
+            identifier: "${CLIENT_ID}"
+            private_key: "${CLIENT_PRIVATE_KEY}"
+            x5c: "${CLIENT_CERTIFICATES}"
       - name: "request-transformer"
         config:
           remove:

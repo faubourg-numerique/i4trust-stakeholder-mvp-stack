@@ -2,7 +2,9 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 const path = require("path");
 
-dotenv.config({ path: path.dirname(__dirname) + path.sep + ".env" });
+const rootDirectoryPath = path.dirname(path.dirname(__dirname));
+
+dotenv.config({ path: [rootDirectoryPath, ".env"].join(path.sep) });
 
 const keyrockAPIConfig = {
     baseURL: `http://localhost:${process.env.KEYROCK_PORT}/v1`,
