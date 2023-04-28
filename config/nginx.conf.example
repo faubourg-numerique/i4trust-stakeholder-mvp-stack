@@ -18,6 +18,32 @@ http {
     }
 
     server {
+        server_name context-broker-proxy.example.com;
+
+        listen 443 ssl;
+
+        ssl_certificate /etc/letsencrypt/live/context-broker-proxy.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/context-broker-proxy.example.com/privkey.pem;
+
+        location / {
+            proxy_pass http://wilma-context-broker;
+        }
+    }
+
+    server {
+        server_name temporal-api-proxy.example.com;
+
+        listen 443 ssl;
+
+        ssl_certificate /etc/letsencrypt/live/temporal-api-proxy.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/temporal-api-proxy.example.com/privkey.pem;
+
+        location / {
+            proxy_pass http://wilma-temporal-api;
+        }
+    }
+
+    server {
         server_name context-broker-ishare-proxy.example.com;
 
         listen 443 ssl;
@@ -31,19 +57,6 @@ http {
     }
 
     server {
-        server_name context-broker-proxy.example.com;
-
-        listen 443 ssl;
-
-        ssl_certificate /etc/letsencrypt/live/context-broker-proxy.example.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/context-broker-proxy.example.com/privkey.pem;
-
-        location / {
-            proxy_pass http://wilma:8090;
-        }
-    }
-
-    server {
         server_name activation-service.example.com;
 
         listen 443 ssl;
@@ -53,19 +66,6 @@ http {
 
         location / {
             proxy_pass http://activation-service:7000;
-        }
-    }
-
-    server {
-        server_name temporal-api.example.com;
-
-        listen 443 ssl;
-
-        ssl_certificate /etc/letsencrypt/live/temporal-api.example.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/temporal-api.example.com/privkey.pem;
-
-        location / {
-            proxy_pass http://mintaka:8080;
         }
     }
 }

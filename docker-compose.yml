@@ -59,6 +59,8 @@ services:
             - "DATASOURCES_DEFAULT_PASSWORD=${TIMESCALE_POSTGRE_SQL_PASSWORD}"
             - "DATASOURCES_DEFAULT_DATABSE=orion-ld"
         restart: "always"
+        depends_on:
+            - "timescale"
 
     keyrock:
         image: "fiware/idm:${KEYROCK_TAG}"
@@ -88,6 +90,44 @@ services:
         depends_on:
             - "mysql"
 
+    wilma-context-broker:
+        image: "fiware/pep-proxy:${WILMA_CONTEXT_BROKER_TAG}"
+        hostname: "wilma-context-broker"
+        ports:
+            - "${WILMA_CONTEXT_BROKER_PORT}:80"
+        environment:
+            - "PEP_PROXY_PORT=80"
+            - "PEP_PROXY_IDM_HOST=keyrock"
+            - "PEP_PROXY_IDM_PORT=3000"
+            - "PEP_PROXY_APP_HOST=orion-ld"
+            - "PEP_PROXY_APP_PORT=1026"
+            - "PEP_PROXY_APP_ID=${WILMA_CONTEXT_BROKER_APP_ID}"
+            - "PEP_PROXY_USERNAME=${WILMA_CONTEXT_BROKER_APP_USERNAME}"
+            - "PEP_PASSWORD=${WILMA_CONTEXT_BROKER_APP_PASSWORD}"
+        restart: "always"
+        depends_on:
+            - "keyrock"
+            - "orion-ld"
+
+    wilma-temporal-api:
+        image: "fiware/pep-proxy:${WILMA_TEMPORAL_API_TAG}"
+        hostname: "wilma-temporal-api"
+        ports:
+            - "${WILMA_TEMPORAL_API_PORT}:80"
+        environment:
+            - "PEP_PROXY_PORT=80"
+            - "PEP_PROXY_IDM_HOST=keyrock"
+            - "PEP_PROXY_IDM_PORT=3000"
+            - "PEP_PROXY_APP_HOST=mintaka"
+            - "PEP_PROXY_APP_PORT=8080"
+            - "PEP_PROXY_APP_ID=${WILMA_TEMPORAL_API_APP_ID}"
+            - "PEP_PROXY_USERNAME=${WILMA_TEMPORAL_API_APP_USERNAME}"
+            - "PEP_PASSWORD=${WILMA_TEMPORAL_API_APP_PASSWORD}"
+        restart: "always"
+        depends_on:
+            - "keyrock"
+            - "mintaka"
+
     kong:
         image: "quay.io/fiware/kong:${KONG_TAG}"
         hostname: "kong"
@@ -113,24 +153,8 @@ services:
         restart: "always"
         volumes:
             - "./config/kong.yaml:/opt/kong/kong.yaml"
-
-    wilma:
-        image: "fiware/pep-proxy:${WILMA_TAG}"
-        hostname: "wilma"
-        ports:
-            - "${WILMA_PORT}:8090"
-        environment:
-            - "PEP_PROXY_PORT=8090"
-            - "PEP_PROXY_IDM_HOST=keyrock"
-            - "PEP_PROXY_IDM_PORT=3000"
-            - "PEP_PROXY_APP_HOST=orion-ld"
-            - "PEP_PROXY_APP_PORT=1026"
-            - "PEP_PROXY_APP_ID=${WILMA_APP_ID}"
-            - "PEP_PROXY_USERNAME=${WILMA_APP_USERNAME}"
-            - "PEP_PASSWORD=${WILMA_APP_PASSWORD}"
-        restart: "always"
         depends_on:
-            - "keyrock"
+            - "orion-ld"
 
     activation-service:
         image: "i4trust/activation-service:${ACTIVATION_SERVICE_TAG}"
@@ -139,6 +163,8 @@ services:
             - "${ACTIVATION_SERVICE_PORT}:7000"
         volumes:
             - "./config/activation-service.yml:/home/aservice/config/as.yml"
+        depends_on:
+            - "keyrock"
 
     nginx:
         image: "nginx:${NGINX_TAG}"
@@ -151,4 +177,7 @@ services:
             - "/etc/letsencrypt:/etc/letsencrypt"
         depends_on:
             - "keyrock"
+            - "wilma-context-broker"
+            - "wilma-temporal-api"
             - "kong"
+            - "activation-service"

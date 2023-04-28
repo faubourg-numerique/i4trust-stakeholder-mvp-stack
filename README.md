@@ -76,10 +76,10 @@ Generate the HTTPS certificates
 
 ```
 sudo certbot certonly --standalone -d identity-manager.example.com
-sudo certbot certonly --standalone -d context-broker-ishare-proxy.example.com
 sudo certbot certonly --standalone -d context-broker-proxy.example.com
+sudo certbot certonly --standalone -d temporal-api-proxy.example.com
+sudo certbot certonly --standalone -d context-broker-ishare-proxy.example.com
 sudo certbot certonly --standalone -d activation-service.example.com
-sudo certbot certonly --standalone -d temporal-api.example.com
 ```
 
 > Please note that generated certificates have an expiration date. Make sure Certbot has scheduled tasks to renew them automatically.
