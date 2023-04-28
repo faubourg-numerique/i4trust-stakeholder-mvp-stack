@@ -123,7 +123,7 @@ async function main() {
 
         await keyrockAPI.put(`/applications/${application.id}/users/${user.id}/roles/${role.id}`);
 
-        process.stdout.write(" OK\n\n");
+        process.stdout.write(" OK\n");
 
         process.stdout.write("Writing variables to env file...");
 
@@ -139,7 +139,7 @@ async function main() {
 
         await fs.appendFile([rootDirectoryPath, ".env"].join(path.sep), data, { encoding: "utf-8" })
 
-        process.stdout.write(" OK\n\n");
+        process.stdout.write(" OK\n");
     }
 }
 
