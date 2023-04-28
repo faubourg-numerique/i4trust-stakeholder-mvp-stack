@@ -88,10 +88,10 @@ node ./tools/config-file-builder-tool/index.js
 Generate the HTTPS certificates
 
 ```
-sudo certbot certonly --standalone -d identity-manager.example.com
-sudo certbot certonly --standalone -d context-broker-proxy.example.com
-sudo certbot certonly --standalone -d temporal-api-proxy.example.com
-sudo certbot certonly --standalone -d context-broker-ishare-proxy.example.com
+sudo certbot certonly --standalone -d identity-manager.example.com ; \
+sudo certbot certonly --standalone -d context-broker-proxy.example.com ; \
+sudo certbot certonly --standalone -d temporal-api-proxy.example.com ; \
+sudo certbot certonly --standalone -d context-broker-ishare-proxy.example.com ; \
 sudo certbot certonly --standalone -d activation-service.example.com
 ```
 
