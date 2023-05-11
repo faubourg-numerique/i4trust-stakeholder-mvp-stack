@@ -130,6 +130,46 @@ sudo docker compose down
 sudo docker compose up -d
 ```
 
+#### Authorize the marketplace to create delegation evidences
+
+> It will be necessary to authorize the marketplace to create delegation evidences on the authorization registry (even in case the marketplace and the authorization registry are the same party, because the authorization service will check if this policy exists).  
+> A tool is provided to easily create this initial policy.
+
+Install the script
+
+```
+npm install --prefix ./tools/initial-policy-creation-tool
+```
+
+Create the configuration file
+
+```
+cp ./tools/initial-policy-creation-tool/.env.example ./tools/initial-policy-creation-tool/.env
+```
+
+Edit the configuration file with correct values
+
+
+Run the script
+
+```
+node ./tools/initial-policy-creation-tool/index.js
+```
+
+## Usage
+
+Start the services
+
+```
+sudo docker compose up -d
+```
+
+Stop the services
+
+```
+sudo docker compose down
+```
+
 ### Upgrade
 
 Stop the services
@@ -145,17 +185,3 @@ git pull
 ```
 
 Check env example file for changes that may need to be made then run again the config file builder tool
-
-## Usage
-
-Start the services
-
-```
-sudo docker compose up -d
-```
-
-Stop the services
-
-```
-sudo docker compose down
-```
