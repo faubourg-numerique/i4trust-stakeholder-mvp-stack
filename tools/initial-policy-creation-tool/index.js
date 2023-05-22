@@ -96,4 +96,9 @@ async function main() {
     console.log("OK\n");
 }
 
-main();
+main().catch(error => {
+    console.log("Failed\n");
+    if (error.response && error.response.data) {
+        console.log(error.response.data);
+    }
+});
