@@ -185,3 +185,7 @@ git pull
 ```
 
 Check env example file for changes that may need to be made then run again the config file builder tool
+
+```
+node ./tools/config-file-builder-tool/index.js
+```
